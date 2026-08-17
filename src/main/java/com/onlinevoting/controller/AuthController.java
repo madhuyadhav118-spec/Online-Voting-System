@@ -1,5 +1,7 @@
 package com.onlinevoting.controller;
 
+import com.onlinevoting.dto.LoginRequest;
+import com.onlinevoting.dto.LoginResponse;
 import com.onlinevoting.dto.RegisterRequest;
 import com.onlinevoting.entity.User;
 import com.onlinevoting.service.UserService;
@@ -26,5 +28,14 @@ public class AuthController {
         return ResponseEntity.ok(
                 "Voter registered successfully"
         );
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(
+            @Valid @RequestBody LoginRequest request) {
+
+        LoginResponse response = userService.login(request);
+
+        return ResponseEntity.ok(response);
     }
 }
